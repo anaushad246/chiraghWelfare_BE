@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const { User, Contact } = require('./models'); // Import the models
+const visitorRoutes = require('./visitorRoutes.js')
 require('dotenv').config();
 
 const app = express();
@@ -13,12 +14,10 @@ app.use(cors({
   origin: process.env.ORIGIN, // Frontend URL
 }));
 app.use(bodyParser.json());
+app.use('/api/visitor',visitorRoutes)
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log('MongoDB connection error:', err));
 

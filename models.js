@@ -56,8 +56,17 @@ const ContactSchema = new mongoose.Schema({
   timestamps: true,
 });
 
+// Visitor Schema
+const VisitorSchema = new mongoose.Schema({
+  count: {
+    type: Number,
+    default: 0
+  }
+});
+
 // Exporting the models
 module.exports = {
   User: mongoose.model('User', UserSchema),
   Contact: mongoose.model('Contact', ContactSchema),
+  Visitor: mongoose.model('Visitor', VisitorSchema) // Fixed typo here
 };
